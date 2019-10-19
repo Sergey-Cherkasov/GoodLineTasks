@@ -5,9 +5,6 @@ import java.util.Scanner;
 
 public class Task2
 {
-
-// Предусмотреть, что может быть несколько пробелов подряд. 
-	
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		File readFile = new File("data/strings.txt");
@@ -20,7 +17,7 @@ public class Task2
 
 		while (i < str.length())
 		{
-			if (str.charAt(i) == ' ')
+			if (str.charAt(i) == ' ' && str.charAt(i + 1) != ' ')
 				y++;
 			i++;
 		}
@@ -28,6 +25,5 @@ public class Task2
 		System.out.println("Количество слов в строке: " + ++y);
 
 		s.close();
-	
 	}
 }
