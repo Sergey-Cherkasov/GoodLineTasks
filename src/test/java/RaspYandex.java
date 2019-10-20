@@ -27,12 +27,34 @@ public class RaspYandex
 	@Before
 	public void setUp()
 	{
-		System.setProperty("webdriver.chrome.driver", "WebDrivers/chromedriver.exe");
-//		System.setProperty("webdriver.gecko.driver", "WebDrivers/geckodriver.exe");
-//		System.setProperty("webdriver.opera.driver", "WebDrivers/operadriver.exe");
+		switch (System.getProperty("os.name").toLowerCase())
+		{
+			case "linux":
+			{
+				System.setProperty("webdriver.chrome.driver", "WebDrivers/chromedriver");
+				System.setProperty("webdriver.gecko.driver", "WebDrivers/geckodriver");
+//				System.setProperty("webdriver.opera.driver", "WebDrivers/operadriver");
+				break;
+			}
+			case "windows":
+			{
+				System.setProperty("webdriver.chrome.driver", "WebDrivers/chromedriver.exe");
+				System.setProperty("webdriver.gecko.driver", "WebDrivers/geckodriver.exe");
+				System.setProperty("webdriver.opera.driver", "WebDrivers/operadriver.exe");
+				break;
+			}
+			case "macos":
+			{
+//				System.setProperty("webdriver.chrome.driver", "WebDrivers/chromedriver.exe");
+//				System.setProperty("webdriver.gecko.driver", "WebDrivers/geckodriver.exe");
+//				System.setProperty("webdriver.opera.driver", "WebDrivers/operadriver.exe");
+				break;
+			}
+		}
+		
 		driver = new ChromeDriver();
-//		driverGecko = new FirefoxDriver();
-//		driverOpera = new OperaDriver();
+//		driver = new FirefoxDriver();
+//		driver = new OperaDriver();
 //		driver.manage().deleteAllCookies();
 //		driver.manage().window().maximize();
 	}
@@ -46,27 +68,19 @@ public class RaspYandex
 	{
 //		1. Пользователь открывает сайт https://rasp.yandex.ru 
 		driver.get(URL);
-//		driverGecko.get(URL);
-//		driverOpera.get(URL);
 
 //		2. Вводит пункт отправления “Кемерово”
 		element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("from")));
-//		element = (new WebDriverWait(driverGecko, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("from")));
-//		element = (new WebDriverWait(driverOpera, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("from")));
 		element.click();
 		element.sendKeys("Кемерово");
 
 //		3. Вводит пункт назначения “Москва”
 		element = driver.findElement(By.id("to"));
-//		element = driverGecko.findElement(By.id("to"));
-//		element = driverOpera.findElement(By.id("to"));
 		element.click();
 		element.sendKeys("Москва");
 
 //		4. Вводит дату 7 сентября 
 		element = driver.findElement(By.id("when"));
-//		element = driverGecko.findElement(By.id("when"));
-//		element = driverOpera.findElement(By.id("when"));
 		element.clear();
 		element.sendKeys("7 сентября");
 //		element.click();
@@ -75,8 +89,6 @@ public class RaspYandex
 
 //		5. Нажимает Найти
 		driver.findElement(By.cssSelector(".SearchForm__submit .Button__title")).click();
-//		driverGecko.findElement(By.cssSelector(".SearchForm__submit .Button__title")).click();
-//		driverOpera.findElement(By.cssSelector(".SearchForm__submit .Button__title")).click();
 //		element.submit();
 
 /*
@@ -87,10 +99,6 @@ public class RaspYandex
  */
 		List<WebElement> elements =	(new WebDriverWait(driver, 10)).until(ExpectedConditions
 				.presenceOfAllElementsLocatedBy(By.cssSelector(".SearchSegment")));
-//		List<WebElement> elements =	(new WebDriverWait(driverGecko, 10)).until(ExpectedConditions
-//				.presenceOfAllElementsLocatedBy(By.cssSelector(".SearchSegment")));
-//		List<WebElement> elements =	(new WebDriverWait(driverOpera, 10)).until(ExpectedConditions
-//				.presenceOfAllElementsLocatedBy(By.cssSelector(".SearchSegment")));
 
 		int i =0 ;
 		for (WebElement webElement : elements)
@@ -130,27 +138,21 @@ public class RaspYandex
 
 //		1. Пользователь открывает сайт https://rasp.yandex.ru
 		driver.get(URL);
-//		driverGecko.get(URL);
-//		driverOpera.get(URL);
+//		driver.get(URL);
+//		driver.get(URL);
 
 //		2. Вводит пункт отправления “Кемерово проспект Ленина”
 		element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("from")));
-//		element = (new WebDriverWait(driverGecko, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("from")));
-//		element = (new WebDriverWait(driverOpera, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("from")));
 		element.click();
 		element.sendKeys("Кемерово проспект Шахтеров");
 
 //		3. Вводит пункт назначения “Кемерово Бакинский переулок”
 		element = driver.findElement(By.id("to"));
-//		element = driverGecko.findElement(By.id("to"));
-//		element = driverOpera.findElement(By.id("to"));
 		element.click();
 		element.sendKeys("Кемерово Бакинский переулок");
 
 //		4. Вводит дату на ближайшую среду
 		element = driver.findElement(By.id("when"));
-//		element = driverGecko.findElement(By.id("when"));
-//		element = driverOpera.findElement(By.id("when"));
 		element.clear();
 		element.sendKeys("среда");
 //		element.click();
@@ -159,13 +161,9 @@ public class RaspYandex
 
 //		5. Нажимает на «Автобус»
 		element = driver.findElement(By.cssSelector(".RadioButton:nth-child(5) > .RadioButton__buttonLable"));
-//		element = driverGecko.findElement(By.cssSelector(".RadioButton:nth-child(5) > .RadioButton__buttonLable"));
-//		element = driverOpera.findElement(By.cssSelector(".RadioButton:nth-child(5) > .RadioButton__buttonLable"));
 		element.click();
 //		5. Нажимает Найти
 		driver.findElement(By.cssSelector(".SearchForm__submit .Button__title")).click();
-//		driverGecko.findElement(By.cssSelector(".SearchForm__submit .Button__title")).click();
-//		driverOpera.findElement(By.cssSelector(".SearchForm__submit .Button__title")).click();
 
 /*
  *		6. Проверяет, что отображается ошибка с текстом «Пункт прибытия не найден.
@@ -173,10 +171,6 @@ public class RaspYandex
  */
 		element = (new WebDriverWait(driver, 10)).until(ExpectedConditions
 				.presenceOfElementLocated(By.cssSelector(".ErrorPageSearchForm__title:nth-child(2)")));
-//		element = (new WebDriverWait(driverGecko, 10)).until(ExpectedConditions
-//				.presenceOfElementLocated(By.cssSelector(".ErrorPageSearchForm__title:nth-child(2)")));
-//		element = (new WebDriverWait(driverOpera, 10)).until(ExpectedConditions
-//				.presenceOfElementLocated(By.cssSelector(".ErrorPageSearchForm__title:nth-child(2)")));
 		strElement = element.getText();
 		if (strElement.equals(str))
 		{
@@ -189,8 +183,6 @@ public class RaspYandex
 	public void tearDown()
 	{
 		driver.quit();
-//		driverGecko.quit();
-//		driverOpera.quit();
 	}
 
 }
