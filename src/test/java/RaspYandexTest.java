@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.qameta.allure.Description;
+
 @TestInstance(Lifecycle.PER_CLASS)
 class RaspYandexTest {
 
@@ -26,6 +28,7 @@ class RaspYandexTest {
 	}
 
 	@Test
+	@Description("Тестирование web-приложения rasp.yandex.ru. Исходные данные: Кемерово-Москва 7 сентября")
 	void TestRouteSearchKemerovoMoscow() {
 		RaspYandexSearchPage searchPage = new RaspYandexSearchPage(driver);
 		RaspYandexResultPage resultPage = searchPage.findRoute("Кемерово", "Москва", "7 сентября");
