@@ -13,17 +13,18 @@ public class Task2
 		String str;
 
 		Scanner s = new Scanner(readFile);
-		str = s.nextLine().trim();
-
-		while (i < str.length())
-		{
-			if (str.charAt(i) == ' ' && str.charAt(i + 1) != ' ')
-				y++;
-			i++;
+		if (s.hasNext()) {
+			str = s.nextLine().trim();
+			while (i < str.length())
+			{
+				if (str.charAt(i) == ' ' && str.charAt(i + 1) != ' ')
+					y++;
+				i++;
+			}
+			System.out.println("Количество слов в строке: " + ++y);
+		} else {
+			System.out.println("File is empty");
 		}
-
-		System.out.println("Количество слов в строке: " + ++y);
-
 		s.close();
 	}
 }
